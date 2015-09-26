@@ -1,0 +1,32 @@
+<ion-view view-title="Choix du parcours">
+	<ion-content>
+
+		<button class="button button-clear button-dark" ng-click="parcoursPrecedent()">
+			<i class="icon ion-chevron-left"></i>
+		</button>
+		<button class="button button-clear button-dark" ng-click="parcoursSuivant()">
+			<i class="icon ion-chevron-right"></i>
+		</button>
+
+		<div class="padding">
+			<p>{{parcoursId+1}}/{{parcoursListe.parcours.length}}</p>	
+		</div>
+
+		<div>
+			<div class="card">
+	  			<div class="item">
+	    				<p>De <span style="font-weight:bold">{{parcoursDepart}}</span></p>
+	  			</div>
+			  	<div class="item item-text-wrap">
+			    		<p>à {{parcoursArrivee}}</p>
+			  	</div>
+			  	<div class="item">
+			    		<p>{{parcoursDistance}} km</p>
+				</div>
+			</div>
+			<button class="button button-full button-balanced">
+	  			Je suis prêt !
+			</button>
+		</div>
+	</ion-content>
+</ion-view>

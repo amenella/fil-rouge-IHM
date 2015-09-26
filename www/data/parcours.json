@@ -1,0 +1,22 @@
+{
+	"parcours" : [
+		{
+			"id" : "0",
+			"depart" : "INSA Lyon",
+			"arrivee" : "Bellecombe",
+			"distance" : "10.2"
+		},
+		{
+			"id" : "1",
+			"depart" : "Terreaux",
+			"arrivee" : "Confluence",
+			"distance" : "9.1"
+		},
+		{
+			"id" : "2",
+			"depart" : "Fourviere",
+			"arrivee" : "Vaulx-en-Velin",
+			"distance" : "11.5"
+		}	
+	]
+}

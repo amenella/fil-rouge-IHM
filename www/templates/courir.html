@@ -1,0 +1,25 @@
+<ion-view view-title="Courir">
+	<ion-content>
+		<div class="list">
+			<label class="item item-input item-stacked-label">
+				<span class="input-label">Départ</span>
+				<input type="text" placeholder="Ma position" ng-model="parcoursData.depart">
+			</label>
+			<label class="item item-input item-stacked-label">
+				<span class="input-label">Arrivée</span>
+				<input type="text" placeholder="Ma position" ng-model="parcoursData.arrivee">
+			</label>
+			<label class="item item-input item-stacked-label">
+				<span class="input-label">Distance (km)</span>
+				<input type="number" ng-model="parcoursData.distance">
+			</label>
+		</div>
+	</ion-content>
+
+	<a href="#/app/courir/choix-parcours">
+		<div class="bar bar-footer bar-balanced">
+			<div class="title">Suivant</div>
+		</div>
+	</a>
+
+</ion-view>
