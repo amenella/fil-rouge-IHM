@@ -12,33 +12,29 @@
 			<p>{{parcoursId+1}}/{{parcoursListe.parcours.length}}</p>	
 		</div>
 
-		<div>
-			<div class="card">
-	  			<div class="item">
-	    				<p>De <span style="font-weight:bold">{{parcoursDepart}}</span></p>
-	  			</div>
-			  	<div class="item item-text-wrap">
-			    		<p>à {{parcoursArrivee}}</p>
-			  	</div>
-			  	<div class="item">
-			    		<p>{{parcoursDistance}} km</p>
-				</div>
-			</div>
-			<button class="button button-full button-balanced">
-	  			C'est parti ! <span style="font-size:0.5em">mon kiki</span>
-			</button>
-		</div>
+		
 
 		<ion-slide-box on-slide-changed="slideHasChanged($index)">
-			<ion-slide>
-				<div class="box blue"><h1>BLUE</h1></div>
-			</ion-slide>
-			<ion-slide>
-				<div class="box yellow"><h1>YELLOW</h1></div>
-			</ion-slide>
-			<ion-slide>
-				<div class="box pink"><h1>PINK</h1></div>
+			<ion-slide ng-repeat="parcours in parcoursListe.parcours">
+				<div class="box blue">
+					<div class="card">
+			  			<div class="item">
+			    				<p>De <span style="font-weight:bold">{{parcours.depart}}</span></p>
+			  			</div>
+					  	
+					  	<div class="item item-text-wrap">
+					    		<p>à {{parcours.arrivee}}</p>
+					  	</div>
+					  	<div class="item">
+					    		<p>{{parcours.distance}} km</p>
+						</div>
+					</div>
+				</div>
 			</ion-slide>
 		</ion-slide-box>
+
+		<button class="button button-full button-balanced">
+  			C'est parti ! <span style="font-size:0.5em">mon kiki</span>
+		</button>
 	</ion-content>
 </ion-view>
