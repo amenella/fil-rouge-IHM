@@ -16,4 +16,17 @@ angular.module('starter.services', [])
 			});
 		}
 	};
+})
+.factory('LoadingService', function($ionicLoading) {
+	return {
+		show: function() {
+			$ionicLoading.show({
+				template: 'Chargement...',
+				duration: '3000'
+			});
+		},
+		hide: function(){
+			$ionicLoading.hide();
+  		}
+	};
 });

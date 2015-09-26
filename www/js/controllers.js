@@ -8,7 +8,7 @@ angular.module('starter.controllers', [])
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
-
+ 
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -46,11 +46,11 @@ angular.module('starter.controllers', [])
   $rootScope.parcoursData = $scope.parcoursData;
 })
 
-.controller('ChoixParcoursCtrl', function($scope, $rootScope, ChoixParcoursService) {
+.controller('ChoixParcoursCtrl', function($scope, $rootScope, $ionicLoading, LoadingService, ChoixParcoursService) {
   /*$scope.depart = $rootScope.parcoursData.depart;
   $scope.arrivee = $rootScope.parcoursData.arrivee;
   $scope.distance = $rootScope.parcoursData.distance;*/
-
+  LoadingService.show();
   ChoixParcoursService.getParcours($scope);
 
   $scope.$on('getParcoursOK', function(event, data) {
