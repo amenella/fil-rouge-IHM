@@ -104,7 +104,7 @@ angular.module('starter.controllers', [])
 })
 
 //-------------------------------------------------------------Controleur IHM suivi GPS sur le parcours
-.controller('SuiviParcoursCtrl', function($scope, $rootScope, $stateParams, $ionicLoading, $compile) {
+.controller('SuiviParcoursCtrl', function($scope, $rootScope, $stateParams, $state, $cordovaGeolocation) {
   $scope.iconPlayPause = "ion-ios-play";
   $scope.parcoursId = $stateParams.parcoursId;
 
@@ -125,63 +125,44 @@ angular.module('starter.controllers', [])
     
   };
   
-                //***********************
-                //     GOOGLE MAPS
-                //***********************
-  function initialize() 
-  {
-    var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
-    
-    var mapOptions = 
-    {
-      center: myLatlng,
-      zoom: 16,
+  //-------- GOOGLE MAP CENTREE SUR NOTRE POSIION
+  var options = {timeout: 10000, enableHighAccuracy: true};
+ 
+  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+ 
+    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+ 
+    var mapOptions = {
+      center: latLng,
+      zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    var map = new google.maps.Map(document.getElementById("map"),
-        mapOptions);
-    
-    //Afficher un marqueur a notre position
-    navigator.geolocation.getCurrentPosition(function(pos) 
-    {
-      map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-      var myLocation = new google.maps.Marker(
-      {
-          position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-          map: map,
-          title: "My Location"
+ 
+    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+    //-------- MARQUEUR
+    //Wait until the map is loaded
+    google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+     
+      var marker = new google.maps.Marker({
+          map: $scope.map,
+          animation: google.maps.Animation.DROP,
+          position: latLng
+      });      
+     
+      //----- FENETRE INFORMATIONS
+      var infoWindow = new google.maps.InfoWindow({
+        content: "Départ"
       });
+
+      infoWindow.open($scope.map, marker);
+     
+ 
+});
+ 
+  }, function(error){
+    console.log("Could not get location");
   });
-
-    $scope.map = map;
-  }
-
-  google.maps.event.addDomListener(window, 'load', initialize);
-
-  /*$scope.centerOnMe = function() 
-  {
-    if(!$scope.map) {
-      return;
-    }
-
-    $scope.loading = $ionicLoading.show({
-      content: 'Getting current location...',
-      showBackdrop: false
-    });
-
-    navigator.geolocation.getCurrentPosition(function(pos) 
-    {
-      $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-      $scope.loading.hide();
-    }, function(error) {
-      alert('Unable to get location: ' + error.message);
-    });
-  };
-
-  $scope.clickTest = function() {
-    alert('Example of infowindow with ng-click')
-  }; */
-
 
 })
 
