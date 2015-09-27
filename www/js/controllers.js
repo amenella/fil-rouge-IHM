@@ -41,11 +41,14 @@ angular.module('starter.controllers', [])
   };
 })
 
+//---------------------------------------------------------------Controleur IHM avec criteres
 .controller('CourirCtrl', function($scope, $rootScope) {
   $scope.parcoursData = {};
   $rootScope.parcoursData = $scope.parcoursData;
 })
 
+
+//--------------------------------------------------------------Controleur IHM affichage des parcours possibles
 .controller('ChoixParcoursCtrl', function($scope, $rootScope, $ionicLoading, LoadingService, ChoixParcoursService) {
   /*$scope.depart = $rootScope.parcoursData.depart;
   $scope.arrivee = $rootScope.parcoursData.arrivee;
@@ -92,8 +95,14 @@ angular.module('starter.controllers', [])
     }
   };
 })
+//-------------------------------------------------------------Controleur IHM suivi GPS sur le parcours
+//.controller('SuiviParcoursCtrl', function($scope, $rootScope) {
+  //$scope.parcoursData = {};
+  //$rootScope.parcoursData = $scope.parcoursData;
+//})
 
-//-----------------------------------------------------Exemple
+
+//---------------------------------------------------------------------------Exemple
 .controller('PlaylistsCtrl', function($scope) {
   $scope.playlists = [
     { title: 'Reggae', id: 1 },

@@ -53,10 +53,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   })
 
   .state('app.suivi-parcours', {
-    url: '/courir/choix-parcours/:id-parcours',
+    url: '/courir/choix-parcours/:parcoursId',
     views: {
       'menuContent': {
         templateUrl: 'templates/suivi-parcours.html'
+        //controller: 'SuiviParcoursCtrl'
       }
     }
   })
