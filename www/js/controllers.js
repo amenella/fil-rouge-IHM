@@ -104,7 +104,7 @@ angular.module('starter.controllers', [])
 })
 
 //-------------------------------------------------------------Controleur IHM suivi GPS sur le parcours
-.controller('SuiviParcoursCtrl', function($scope, $rootScope, $stateParams) {
+.controller('SuiviParcoursCtrl', function($scope, $rootScope, $stateParams, $interval) {
   $scope.iconPlayPause = "ion-ios-play";
   $scope.parcoursId = $stateParams.parcoursId;
 
@@ -112,15 +112,33 @@ angular.module('starter.controllers', [])
   $scope.arrivee = $rootScope.parcoursArrivee;
   $scope.distance = $rootScope.parcoursDistance;
 
-  //Fonction permettant de changer l'icon play/pause
+  // on initialise à 0 la valeur du chrono
+  // on utilise une date pour faciliter la gestion du temps
+  var t = new Date();
+  t.setSeconds(0);
+  t.setMinutes(0);
+  t.setHours(0);
+  $scope.timer = t;
+
+  // fonction qui va incrémenter et mettre à jour la valeur du chrono
+  $scope.updateTimer = function() {
+    t.setSeconds(t.getSeconds()+1);
+    $scope.timer = t;
+  }
+
+  //Fonction permettant de changer l'icon play/pause et de lancer ou arreter le chrono
   $scope.switchPlayPause = function() {
     if ($scope.iconPlayPause == "ion-ios-pause")
     {
       $scope.iconPlayPause = "ion-ios-play";
+      // on annule l'interval updateTimer si on appuis sur pause
+      $interval.cancel(updateTimer);
     }
     else
     {
       $scope.iconPlayPause = "ion-ios-pause";
+      // on instancie un $interval que l'on nomme updateTimer qui va appeler la fonction du même nom toutes les 1000ms
+      updateTimer = $interval(function(){ $scope.updateTimer(); },1000);
     }
     
   };
