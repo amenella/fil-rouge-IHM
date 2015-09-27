@@ -56,12 +56,18 @@ angular.module('starter.controllers', [])
   LoadingService.show();
   ChoixParcoursService.getParcours($scope);
 
+  //Initialisation avec le premier parcours de la liste
   $scope.$on('getParcoursOK', function(event, data) {
     $scope.parcoursListe = data;
     $scope.parcoursId = 0;
     $scope.parcoursDepart = $scope.parcoursListe.parcours[0].depart;
     $scope.parcoursArrivee = $scope.parcoursListe.parcours[0].arrivee;
     $scope.parcoursDistance = $scope.parcoursListe.parcours[0].distance;
+
+    //Test pour faire l'IHM 3, sera a placer dans le swap qui modifie les valeurs
+    $rootScope.parcoursDepart = $scope.parcoursDepart;
+    $rootScope.parcoursArrivee = $scope.parcoursArrivee;
+    $rootScope.parcoursDistance = $scope.parcoursDistance;
   });
 
   $scope.$on('getParcoursKO', function(event, data) {
@@ -77,6 +83,7 @@ angular.module('starter.controllers', [])
         $scope.parcoursDepart = $scope.parcoursListe.parcours[i].depart;
         $scope.parcoursArrivee = $scope.parcoursListe.parcours[i].arrivee;
         $scope.parcoursDistance = $scope.parcoursListe.parcours[i].distance;
+
       }
     }
   };
@@ -95,11 +102,15 @@ angular.module('starter.controllers', [])
     }
   };
 })
+
 //-------------------------------------------------------------Controleur IHM suivi GPS sur le parcours
-//.controller('SuiviParcoursCtrl', function($scope, $rootScope) {
-  //$scope.parcoursData = {};
-  //$rootScope.parcoursData = $scope.parcoursData;
-//})
+.controller('SuiviParcoursCtrl', function($scope, $rootScope, $stateParams) {
+  $scope.parcoursId = $stateParams.parcoursId;
+
+  $scope.depart = $rootScope.parcoursDepart;
+  $scope.arrivee = $rootScope.parcoursArrivee;
+  $scope.distance = $rootScope.parcoursDistance;
+})
 
 
 //---------------------------------------------------------------------------Exemple

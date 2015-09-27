@@ -1,8 +1,17 @@
 <ion-view view-title="Suivi du parcours">
 	<ion-content>
 		<div class="content">
-			<p>IHM 3</p>
+			<p>IHM 3 : {{parcoursId}}</p>
+			<p>{{depart}}</p>
+			<p>{{arrivee}}</p>
+			<p>{{distance}}</p>
 		</div>
-	</ion-content>
 
+
+		<a href="#/app/courir/fin-parcours" style="text-decoration:none;">
+			<button class="button button-full button-balanced">
+	  			Terminer
+			</button>
+		</a>
+	</ion-content>
 </ion-view>

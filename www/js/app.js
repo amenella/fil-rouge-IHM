@@ -56,8 +56,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     url: '/courir/choix-parcours/:parcoursId',
     views: {
       'menuContent': {
-        templateUrl: 'templates/suivi-parcours.html'
-        //controller: 'SuiviParcoursCtrl'
+        templateUrl: 'templates/suivi-parcours.html',
+        controller: 'SuiviParcoursCtrl'
+      }
+    }
+  })
+
+  .state('app.fin-parcours', {
+    url: '/courir/fin-parcours',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/fin-parcours.html'
       }
     }
   })
