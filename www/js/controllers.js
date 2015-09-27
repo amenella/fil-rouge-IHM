@@ -104,7 +104,7 @@ angular.module('starter.controllers', [])
 })
 
 //-------------------------------------------------------------Controleur IHM suivi GPS sur le parcours
-.controller('SuiviParcoursCtrl', function($scope, $rootScope, $stateParams) {
+.controller('SuiviParcoursCtrl', function($scope, $rootScope, $stateParams, $ionicLoading, $compile) {
   $scope.iconPlayPause = "ion-ios-play";
   $scope.parcoursId = $stateParams.parcoursId;
 
@@ -125,6 +125,64 @@ angular.module('starter.controllers', [])
     
   };
   
+                //***********************
+                //     GOOGLE MAPS
+                //***********************
+  function initialize() 
+  {
+    var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
+    
+    var mapOptions = 
+    {
+      center: myLatlng,
+      zoom: 16,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("map"),
+        mapOptions);
+    
+    //Afficher un marqueur a notre position
+    navigator.geolocation.getCurrentPosition(function(pos) 
+    {
+      map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+      var myLocation = new google.maps.Marker(
+      {
+          position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+          map: map,
+          title: "My Location"
+      });
+  });
+
+    $scope.map = map;
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+  /*$scope.centerOnMe = function() 
+  {
+    if(!$scope.map) {
+      return;
+    }
+
+    $scope.loading = $ionicLoading.show({
+      content: 'Getting current location...',
+      showBackdrop: false
+    });
+
+    navigator.geolocation.getCurrentPosition(function(pos) 
+    {
+      $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+      $scope.loading.hide();
+    }, function(error) {
+      alert('Unable to get location: ' + error.message);
+    });
+  };
+
+  $scope.clickTest = function() {
+    alert('Example of infowindow with ng-click')
+  }; */
+
+
 })
 
 
