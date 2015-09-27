@@ -6,7 +6,20 @@
 			<p>{{arrivee}}</p>
 			<p>{{distance}}</p>
 		</div>
-
+		<div class="box blue">
+					<div class="card">
+			  			<div class="item">
+			    				<p>Distante restante : <span style="font-weight:bold">{{distance}}</span> km</p>
+			  			</div>
+					  	
+					  	<div class="item">
+					    		<p>Temps : {{parcours.arrivee}}</p>
+					    		<button class="button button-clear button-dark" ng-click="switchPlayPause()">
+									<i class="icon {{iconPlayPause}}"></i>
+								</button>
+					  	</div>
+					</div>
+				</div>
 
 		<a href="#/app/courir/fin-parcours" style="text-decoration:none;">
 			<button class="button button-full button-balanced">

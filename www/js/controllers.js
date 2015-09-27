@@ -105,11 +105,26 @@ angular.module('starter.controllers', [])
 
 //-------------------------------------------------------------Controleur IHM suivi GPS sur le parcours
 .controller('SuiviParcoursCtrl', function($scope, $rootScope, $stateParams) {
+  $scope.iconPlayPause = "ion-ios-play";
   $scope.parcoursId = $stateParams.parcoursId;
 
   $scope.depart = $rootScope.parcoursDepart;
   $scope.arrivee = $rootScope.parcoursArrivee;
   $scope.distance = $rootScope.parcoursDistance;
+
+  //Fonction permettant de changer l'icon play/pause
+  $scope.switchPlayPause = function() {
+    if ($scope.iconPlayPause == "ion-ios-pause")
+    {
+      $scope.iconPlayPause = "ion-ios-play";
+    }
+    else
+    {
+      $scope.iconPlayPause = "ion-ios-pause";
+    }
+    
+  };
+  
 })
 
 
