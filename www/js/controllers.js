@@ -118,11 +118,12 @@ angular.module('starter.controllers', [])
   t.setSeconds(0);
   t.setMinutes(0);
   t.setHours(0);
+  t.setMilliseconds(0);
   $scope.timer = t;
 
   // fonction qui va incrémenter et mettre à jour la valeur du chrono
   $scope.updateTimer = function() {
-    t.setSeconds(t.getSeconds()+1);
+    t.setMilliseconds(t.getMilliseconds()+10);
     $scope.timer = t;
   }
 
@@ -138,7 +139,7 @@ angular.module('starter.controllers', [])
     {
       $scope.iconPlayPause = "ion-ios-pause";
       // on instancie un $interval que l'on nomme updateTimer qui va appeler la fonction du même nom toutes les 1000ms
-      updateTimer = $interval(function(){ $scope.updateTimer(); },1000);
+      updateTimer = $interval(function(){ $scope.updateTimer(); },10);
     }
     
   };
