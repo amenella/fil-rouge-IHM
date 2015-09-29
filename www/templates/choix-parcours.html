@@ -14,7 +14,7 @@
 
 		
 
-		<ion-slide-box on-slide-changed="slideHasChanged($index)">
+		<ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="{{shouldShow()}}" does-continue="true" auto-play="false">
 			<ion-slide ng-repeat="parcours in parcoursListe.parcours">
 				<div class="box blue">
 					<div class="card">
