@@ -112,36 +112,40 @@ angular.module('starter.controllers', [])
   $scope.arrivee = $rootScope.parcoursArrivee;
   $scope.distance = $rootScope.parcoursDistance;
 
-  // on initialise à 0 la valeur du chrono
-  // on utilise une date pour faciliter la gestion du temps
-  var t = new Date();
-  t.setSeconds(0);
-  t.setMinutes(0);
-  t.setHours(0);
-  t.setMilliseconds(0);
-  $scope.timer = t;
+  // on instancie un objet de type duration pour conserver le chrono
+  var t = moment.duration();
+  // on le formate avec un format par défaut
+  $scope.timer = t.format('h:mm:ss',1, { trim: false });
 
   // fonction qui va incrémenter et mettre à jour la valeur du chrono
-  $scope.updateTimer = function() {
-    t.setMilliseconds(t.getMilliseconds()+10);
-    $scope.timer = t;
-  }
+  function updateTimer() {
+    t.add(100, 'ms');
+    $scope.timer = t.format('h:mm:ss',1, { trim: false });
+  };
 
   //Fonction permettant de changer l'icon play/pause et de lancer ou arreter le chrono
   $scope.switchPlayPause = function() {
     if ($scope.iconPlayPause == "ion-ios-pause")
     {
       $scope.iconPlayPause = "ion-ios-play";
-      // on annule l'interval updateTimer si on appuis sur pause
-      $interval.cancel(updateTimer);
+      // on annule l'interval updateTimerInterval si on appuie sur pause
+      $interval.cancel(updateTimerInterval);
     }
     else
     {
       $scope.iconPlayPause = "ion-ios-pause";
-      // on instancie un $interval que l'on nomme updateTimer qui va appeler la fonction du même nom toutes les 1000ms
-      updateTimer = $interval(function(){ $scope.updateTimer(); },10);
+      // on instancie un $interval que l'on nomme updateTimerInterval qui va appeler la fonction updateInterval toutes les 100ms
+      updateTimerInterval = $interval(updateTimer,100);
     }
     
+  };
+
+  // fonction qui va conserver le temps total de parcours dans le rootScope avec la variable finalTimer en ms
+  // et réinitialiser le timer de la vue courante (nécessaire en cas d'appui sur retour)
+  $scope.saveTimer = function() {
+    $rootScope.finalTimer = t.asMilliseconds();
+    t = moment.duration();
+    $scope.timer = t.format('h:mm:ss',1, { trim: false });
   };
   
   //-------- GOOGLE MAP CENTREE SUR NOTRE POSIION
@@ -184,6 +188,14 @@ angular.module('starter.controllers', [])
   });
 
 })
+
+//-------------------------------------------------------------Controleur IHM résumé fin de parcours
+.controller('FinParcoursCtrl', function($scope, $rootScope) {
+  // on récupère la valeur du dernier chrono passé par le rootScope et on l'affiche dans le template fin-parcours.html
+  var previousTimer = moment.duration($rootScope.finalTimer).format('h [heures] mm [minutes et] ss [secondes]',1);
+  $scope.finalTimer = previousTimer;
+})
+
 
 
 //---------------------------------------------------------------------------Exemple
