@@ -27,14 +27,14 @@
 		    		<button class="button button-clear button-dark" ng-click="switchPlayPause()">
 						<i class="icon {{iconPlayPause}}"></i>
 					</button>
-					<p ng-bind="timer | date:'H:mm:ss.sss'"></p>
+					<p>{{timer}}</p>
 			  	</div>
 			</div>
 		</div>  
 		
 		<!-- Bouton du bas -->
 		<a href="#/app/courir/fin-parcours" style="text-decoration:none;">
-			<button class="button button-full button-balanced">
+			<button class="button button-full button-balanced" ng-click="saveTimer()">
 	  			Terminer
 			</button>
 		</a>

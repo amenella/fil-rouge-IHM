@@ -66,7 +66,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     url: '/courir/fin-parcours',
     views: {
       'menuContent': {
-        templateUrl: 'templates/fin-parcours.html'
+        templateUrl: 'templates/fin-parcours.html',
+        controller: 'FinParcoursCtrl'
       }
     }
   })
